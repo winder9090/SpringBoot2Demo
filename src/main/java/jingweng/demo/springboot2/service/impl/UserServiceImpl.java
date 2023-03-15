@@ -1,0 +1,28 @@
+package jingweng.demo.springboot2.service.impl;
+
+import jingweng.demo.springboot2.entity.User;
+import jingweng.demo.springboot2.mapper.UserMapper;
+import jingweng.demo.springboot2.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @projectName: SpringBoot2Demo
+ * @package: jingweng.demo.springboot2.service.impl
+ * @className: UserServiceImpl
+ * @author:
+ * @description: TODO
+ * @date: 2023/3/15 13:20
+ * @version: 1.0
+ */
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public User findByAccount(String account) {
+        return userMapper.findByAccount(account);
+    }
+}
