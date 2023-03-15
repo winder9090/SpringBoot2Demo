@@ -1,5 +1,8 @@
 package jingweng.demo.springboot2.controller;
 
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jingweng.demo.springboot2.entity.Department;
 import jingweng.demo.springboot2.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import java.util.List;
  * @date: 2023/3/15 9:20
  * @version: 1.0
  */
+@Api(tags = "部门查询模块")
 @RestController
 public class DepartmentController {
 
@@ -24,6 +28,7 @@ public class DepartmentController {
     private DepartmentService departmentServer;
 
     // 查询全部部门
+    @ApiOperation(value = "查询全部部门")
     @GetMapping("/getDepartments")
     public List<Department> getDepartments(){
         return departmentServer.getDepartments();
