@@ -2,7 +2,11 @@ package jingweng.demo.springboot2.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jingweng.demo.springboot2.entity.User;
+import jingweng.demo.springboot2.entity.UserToken;
 import jingweng.demo.springboot2.enums.ServerResponseEnum;
+import jingweng.demo.springboot2.oauth2.TokenGenerator;
+import jingweng.demo.springboot2.service.UserService;
 import jingweng.demo.springboot2.vo.ServerResponseVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -13,11 +17,14 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @projectName: SpringBoot2Demo
@@ -32,17 +39,29 @@ import java.util.Date;
 @RequestMapping("")
 @Api(tags = "登录模块")
 public class LoginController {
+    private final static int EXPIRE = 3600 * 12;
+
+    @Autowired
+    UserService userService;
 
     @ApiOperation(value = "登录")
     @PostMapping("/login")
     public ServerResponseVO login(@RequestParam(value = "account") String account,
                                   @RequestParam(value = "password") String password) {
-        Subject userSubject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(account, password);
         try {
-            // 登录验证
-            userSubject.login(token);
-            return ServerResponseVO.success();
+            String  token = TokenGenerator.generateValue();
+
+            User user =  userService.findByAccount(account);
+
+            UserToken userToken = new UserToken();
+            userToken.setId(user.getId());
+            userToken.setToken(token);
+            userService.addUserToken(userToken);
+
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("token", token);
+            map.put("expire", EXPIRE);
+            return ServerResponseVO.success(map);
         } catch (UnknownAccountException e) {
             return ServerResponseVO.error(ServerResponseEnum.ACCOUNT_NOT_EXIST);
         } catch (DisabledAccountException e) {
@@ -58,10 +77,6 @@ public class LoginController {
     @PostMapping("logout")
     @ApiOperation(value = "退出")
     public ServerResponseVO logout(HttpServletRequest request) {
-        Subject userSubject = SecurityUtils.getSubject();
-
-        //退出
-        userSubject.logout();
 
         return ServerResponseVO.success();
     }

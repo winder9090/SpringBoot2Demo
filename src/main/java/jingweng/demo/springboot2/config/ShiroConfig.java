@@ -1,5 +1,6 @@
 package jingweng.demo.springboot2.config;
 
+import jingweng.demo.springboot2.oauth2.Oauth2Filter;
 import jingweng.demo.springboot2.oauth2.UserRealm;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -60,8 +63,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/");
+        //oauth过滤
+        Map<String, Filter> filters = new HashMap<>();
+        filters.put("oauth2", new Oauth2Filter());
+        shiroFilterFactoryBean.setFilters(filters);
+
         Map<String, String> map = new LinkedHashMap<>();
         // 有先后顺序
         map.put("/login", "anon");      // 允许匿名访问
@@ -69,8 +75,8 @@ public class ShiroConfig {
         map.put("/v2/api-docs", "anon");
         map.put("/doc.html", "anon");      // 允许匿名访问
         map.put("/swagger-resources/**", "anon");
-        map.put("/hello", "authc");        // 进行身份认证后才能访问
-        map.put("/getDepartments", "authc");        // 进行身份认证后才能访问
+        map.put("/hello", "oauth2");        // 进行身份认证后才能访问
+        map.put("/getDepartments", "oauth2");        // 进行身份认证后才能访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }

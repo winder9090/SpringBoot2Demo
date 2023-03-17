@@ -20,6 +20,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
  * @projectName: SpringBoot2Demo
  * @package: jingweng.demo.springboot2.config
@@ -64,7 +66,8 @@ public class SwaggerConfig {
     private List<SecurityScheme> security() {
         List<SecurityScheme> apiKeyList= new ArrayList<>();
 
-        apiKeyList.add(new ApiKey("token", "token", "header"));
-        return apiKeyList;
+        return newArrayList(
+                new ApiKey("token", "token", "header")
+        );
     }
 }

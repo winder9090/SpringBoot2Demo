@@ -5,13 +5,14 @@ package jingweng.demo.springboot2.oauth2;
  * @package: jingweng.demo.springboot2.oauth2
  * @className: UserRealm
  * @author:
- * @description: TODO
+ * @description: 负责认证用户身份和对用户进行授权
  * @date: 2023/3/15 13:36
  * @version: 1.0
  */
 
 import jingweng.demo.springboot2.entity.Role;
 import jingweng.demo.springboot2.entity.User;
+import jingweng.demo.springboot2.entity.UserToken;
 import jingweng.demo.springboot2.service.PermissionService;
 import jingweng.demo.springboot2.service.RoleService;
 import jingweng.demo.springboot2.service.UserService;
@@ -28,9 +29,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * 负责认证用户身份和对用户进行授权
- */
 @Component
 public class UserRealm extends AuthorizingRealm {
 
@@ -43,12 +41,15 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     private PermissionService permissionService;
 
-    //@Override
-    //public boolean supports(AuthenticationToken token) {
-    //    return token instanceof Oauth2Token;
-    //}
 
-    // 用户授权
+
+    /**
+     * @param principalCollection:
+     * @return AuthorizationInfo
+     * @author
+     * @description 用户授权
+     * @date 2023/3/17 8:46
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         User user = (User) principalCollection.getPrimaryPrincipal();
@@ -69,14 +70,26 @@ public class UserRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
-    // 用户认证
+    /**
+     * @param authToken:
+     * @return AuthenticationInfo
+     * @author
+     * @description 认证(登录时调用)
+     * @date 2023/3/17 8:47
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
-        UsernamePasswordToken token = (UsernamePasswordToken) authToken;
-        User user = userService.findByAccount(token.getUsername());
-        if (user == null) {
+        String accessToken = (String) authToken.getPrincipal();
+        if (accessToken == null) {
             return null;
         }
-        return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+
+        UserToken userToken = userService.findByToken(accessToken);
+        return new SimpleAuthenticationInfo(userToken, accessToken, getName());
+    }
+
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof Oauth2Token;
     }
 }
