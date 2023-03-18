@@ -18,4 +18,8 @@ public interface UserService {
     public UserToken findByToken(String token);
 
     public int addUserToken(UserToken userToken);
+
+    public UserToken findByID(int id);
+
+    public void delToken(int id);
 }

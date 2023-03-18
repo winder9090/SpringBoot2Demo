@@ -22,4 +22,7 @@ public interface UserTokenMapper {
 
     int addUserToken(UserToken usertoken);
 
+    UserToken findID(int id);
+
+    void delToken(int id);
 }

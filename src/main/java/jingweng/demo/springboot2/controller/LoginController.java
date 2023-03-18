@@ -61,7 +61,17 @@ public class LoginController {
 
             User user =  userService.findByAccount(account);
 
-            UserToken userToken = new UserToken();
+            if(user == null){
+                return ServerResponseVO.error(ServerResponseEnum.ACCOUNT_NOT_EXIST);
+            }
+
+            UserToken userToken = userService.findByID(user.getId());
+
+            if(userToken != null){
+                userService.delToken(user.getId());
+            }
+
+            userToken = new UserToken();
             userToken.setId(user.getId());
             userToken.setToken(token);
             userService.addUserToken(userToken);
