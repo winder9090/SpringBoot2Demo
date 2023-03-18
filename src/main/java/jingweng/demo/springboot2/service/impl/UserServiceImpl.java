@@ -36,4 +36,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int addUserToken(UserToken userToken){return  userTokenMapper.addUserToken(userToken);};
+
+    @Override
+    public UserToken findByID(int id){return userTokenMapper.findID(id);};
+
+    @Override
+    public void delToken(int id){userTokenMapper.delToken(id);};
 }

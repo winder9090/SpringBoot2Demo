@@ -7,7 +7,18 @@
         where token = #{token}
     </select>
 
-     <insert id="addUserToken" parameterType="jingweng.demo.springboot2.entity.UserToken">
+    <select id="findID" parameterType="Map" resultType="jingweng.demo.springboot2.entity.UserToken">
+        select *
+        from User_Token
+        where id = #{id}
+    </select>
+
+    <insert id="addUserToken" parameterType="jingweng.demo.springboot2.entity.UserToken">
             insert into User_Token (id, token) VALUES (#{id},#{token});
-     </insert>
+    </insert>
+
+    <delete id="delToken" parameterType="jingweng.demo.springboot2.entity.UserToken">
+        delete from User_Token
+        where id = #{id}
+    </delete>
 </mapper>
