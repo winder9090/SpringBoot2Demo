@@ -1,5 +1,12 @@
 package jingweng.demo.springboot2.websocket;
 
+import jingweng.demo.springboot2.config.WebSocketConfig;
+import jingweng.demo.springboot2.entity.Department;
+import jingweng.demo.springboot2.service.DepartmentService;
+import jingweng.demo.springboot2.service.impl.DepartmentServiceImpl;
+import jingweng.demo.springboot2.utils.SpringContextUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,6 +17,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
@@ -23,7 +31,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 @Component
 @Service
-@ServerEndpoint("/api/websocket/{sid}")
+@ServerEndpoint(value = "/api/websocket/{sid}",configurator= WebSocketConfig.class)
 public class WebSocketServer {
     private static final Logger log = LoggerFactory.getLogger(WebSocketServer.class);
     private static int onlineCount = 0;
@@ -36,6 +44,8 @@ public class WebSocketServer {
 
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) {
+        DepartmentService s = SpringContextUtils.getBean(DepartmentService.class);
+        List<Department> d = s.getDepartments();
         this.session = session;
         webSocketSet.add(this);
         this.sid = sid;
