@@ -4,6 +4,8 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
+import jingweng.demo.springboot2.redis.RedisKeys;
+import jingweng.demo.springboot2.redis.RedisUtils;
 import jingweng.demo.springboot2.service.CaptchaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +26,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class CaptchaServiceImpl implements CaptchaService {
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Value("${renren.redis.open: false}")
     private boolean open;
@@ -63,10 +68,26 @@ public class CaptchaServiceImpl implements CaptchaService {
     }
 
     private void setCache(String key, String value){
-        localCache.put(key, value);
+        if(open){
+            key = RedisKeys.getCaptchaKey(key);
+            redisUtils.set(key, value, 300);
+        }else{
+            localCache.put(key, value);
+        }
     }
 
     private String getCache(String key){
+        if(open){
+            key = RedisKeys.getCaptchaKey(key);
+            String captcha = (String)redisUtils.get(key);
+            //删除验证码
+            if(captcha != null){
+                redisUtils.delete(key);
+            }
+
+            return captcha;
+        }
+
         String captcha = localCache.getIfPresent(key);
         //删除验证码
         if(captcha != null){
