@@ -35,13 +35,14 @@ public class WebSocketConfig extends ServerEndpointConfig.Configurator{
     @Override
     public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
         // 将http会话的用户信息绑定到websocket会话的用户信息中
-        //sec.getUserProperties().put("user", SecurityUser.getUser());
         Subject subject = SecurityUtils.getSubject();
-        sec.getUserProperties().put("user", subject);
         if(subject == null){
             return ;
         }
         Object obj  = subject.getPrincipal();
+        if(obj != null){
+            sec.getUserProperties().put("user", obj);
+        }
         super.modifyHandshake(sec, request, response);
     }
 

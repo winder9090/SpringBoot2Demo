@@ -44,8 +44,13 @@ public class WebSocketServer {
 
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) {
+        // 获取websocket会话的用户信息绑定的http会话的用户信息
+        Object obj = session.getUserProperties().get("user");
+
+        // 测试注入类,执行函数
         DepartmentService s = SpringContextUtils.getBean(DepartmentService.class);
         List<Department> d = s.getDepartments();
+
         this.session = session;
         webSocketSet.add(this);
         this.sid = sid;
