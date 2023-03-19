@@ -61,6 +61,7 @@ public class ShiroConfig {
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         //oauth过滤
@@ -68,6 +69,7 @@ public class ShiroConfig {
         filters.put("oauth2", new Oauth2Filter());
         shiroFilterFactoryBean.setFilters(filters);
 
+        // 配置拦截规则
         Map<String, String> map = new LinkedHashMap<>();
         // 有先后顺序
         map.put("/login", "anon");      // 允许匿名访问
@@ -82,6 +84,10 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+    /**
+     * 在spring容器处在某一声明周期时时，为shiro中的相关bean执行对应的bean生命周期方法
+     * @return
+     */
     @Bean("lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
