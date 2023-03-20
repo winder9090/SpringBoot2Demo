@@ -1,5 +1,6 @@
 package jingweng.demo.springboot2.config;
 
+import jingweng.demo.springboot2.xss.XssFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,24 @@ public class FilterConfig {
         registration.setEnabled(true);
         registration.setOrder(Integer.MAX_VALUE - 1);
         registration.addUrlPatterns("/*");
+        return registration;
+    }
+
+    /**
+     * @param :
+     * @return FilterRegistrationBean
+     * @author
+     * @description 注册 XssFilter
+     * @date 2023/3/20 10:20
+     */
+    @Bean
+    public FilterRegistrationBean xssFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        registration.setFilter(new XssFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("xssFilter");
+        registration.setOrder(Integer.MAX_VALUE);
         return registration;
     }
 }
