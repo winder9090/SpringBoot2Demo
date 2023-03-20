@@ -7,13 +7,11 @@
  - 验证码
  - Redis 缓存
  - easypoi 导出 Excel
+ - XSS防范
+ - 集成spring-boot-starter-validation进行参数校验
 
 ### 待添加功能
-
- - Hibernate Validator校验框架
-
  - job 定时任务
  - log 日志管理
  - 网络通信接口(TCP UDP)
- - XSS防范
  - SQL注入防范
