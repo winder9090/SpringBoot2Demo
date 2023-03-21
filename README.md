@@ -10,8 +10,8 @@
  - XSS防范
  - 集成spring-boot-starter-validation进行参数校验
  - job 定时任务
+ - 操作日志记录
 
 ### 待添加功能
- - log 日志管理
  - 网络通信接口(TCP UDP)
  - SQL注入防范

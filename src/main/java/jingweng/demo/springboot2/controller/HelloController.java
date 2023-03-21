@@ -2,8 +2,10 @@ package jingweng.demo.springboot2.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jingweng.demo.springboot2.annotation.LogOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jingweng.demo.springboot2.annotation.LogOperation;
 
 /**
  * @projectName: SpringBoot2Demo
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @ApiOperation(value = "向客人问好")
+    @LogOperation("向客人问好")
     @RequestMapping("/hello")
     public String hello() {
         return "Hello World";

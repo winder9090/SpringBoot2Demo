@@ -11,7 +11,7 @@ import java.util.Date;
  * @package: jingweng.demo.springboot2.entity
  * @className: ScheduleJobEntity
  * @author:
- * @description: TODO
+ * @description: 定时任务
  * @date: 2023/3/20 15:44
  * @version: 1.0
  */
