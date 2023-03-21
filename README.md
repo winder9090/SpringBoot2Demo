@@ -11,7 +11,7 @@
  - 集成spring-boot-starter-validation进行参数校验
  - job 定时任务
  - 操作日志记录
-
+ - SQL注入防范
+ - 
 ### 待添加功能
  - 网络通信接口(TCP UDP)
- - SQL注入防范
