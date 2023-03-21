@@ -36,11 +36,19 @@ public class LogOperationAspect {
     @Autowired
     private SysLogOperationService sysLogOperationService;
 
+    /**
+     * @param :
+     * @return void
+     * @author
+     * @description 设置为LogOperation注解的切入点
+     * @date 2023/3/21 15:24
+     */
     @Pointcut("@annotation(jingweng.demo.springboot2.annotation.LogOperation)")
     public void logPointCut() {
 
     }
 
+    // 给logPointCut()方法添加切面
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         long beginTime = System.currentTimeMillis();

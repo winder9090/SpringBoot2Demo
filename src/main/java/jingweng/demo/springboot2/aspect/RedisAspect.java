@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  * Redis切面处理类
  *
  */
-@Aspect
-@Component
+@Aspect     // 标注增强处理类（切面类）
+@Component  // 交由Spring容器管理
 public class RedisAspect {
     private Logger logger = LoggerFactory.getLogger(getClass());
     /**
@@ -22,6 +22,12 @@ public class RedisAspect {
     @Value("${renren.redis.open: false}")
     private boolean open;
 
+    /**
+     * 在切面类中使用execution给批量方法添加切面
+     * @param point
+     * @return
+     * @throws Throwable
+     */
     @Around("execution(* jingweng.demo.springboot2.redis.RedisUtils.*(..))")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         Object result = null;
