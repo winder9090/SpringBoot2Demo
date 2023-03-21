@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jingweng.demo.springboot2.mapper.schedule_jobMapper">
+    <select id="selectList" resultType="jingweng.demo.springboot2.entity.ScheduleJobEntity">
+        select * from schedule_job
+    </select>
+    <select id="findScheduleJob" parameterType="Long" resultType="jingweng.demo.springboot2.entity.ScheduleJobEntity">
+        select * from schedule_job where id = #{id}
+    </select>
+
+</mapper>
