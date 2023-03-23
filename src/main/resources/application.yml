@@ -50,6 +50,9 @@ renren:
 # mapper xml 文件地址
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启控制台 SQL 日志打印
+    # 关闭控制台 SQL 日志打印 log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
 
 # springdoc-openapi项目配置
 springdoc:
