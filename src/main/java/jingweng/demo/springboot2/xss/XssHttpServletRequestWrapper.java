@@ -32,6 +32,13 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         orgRequest = request;
     }
 
+    /**
+     * @param :
+     * @return ServletInputStream
+     * @author
+     * @description 过滤请求体 json 格式的
+     * @date 2023/3/23 13:53
+     */
     @Override
     public ServletInputStream getInputStream() throws IOException {
         //非json类型，直接返回
@@ -71,6 +78,13 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         };
     }
 
+    /**
+     * @param name:
+     * @return String
+     * @author
+     * @description 过滤request.getParameter的参数
+     * @date 2023/3/23 13:52
+     */
     @Override
     public String getParameter(String name) {
         String value = super.getParameter(xssEncode(name));
@@ -80,6 +94,13 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         return value;
     }
 
+    /**
+     * @param name:
+     * @return String
+     * @author
+     * @description 过滤springmvc中的 @RequestParam 注解中的参数
+     * @date 2023/3/23 13:54
+     */
     @Override
     public String[] getParameterValues(String name) {
         String[] parameters = super.getParameterValues(name);
