@@ -162,6 +162,13 @@
 			<version>5.7.22</version>
 		</dependency>
 
+		<!--MyBatis 分页插件-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.4.6</version>
+		</dependency>
+
 	</dependencies>
 	<!-- 阿里云maven仓库 -->
 	<repositories>

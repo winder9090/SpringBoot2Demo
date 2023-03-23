@@ -5,4 +5,10 @@
     <select id="getDepartments" resultType="jingweng.demo.springboot2.entity.Department">
         select * from department;
     </select>
+
+    <select id="selectPage" resultType="jingweng.demo.springboot2.entity.Department">
+        select id, departmentName
+        from department
+    </select>
+
 </mapper>

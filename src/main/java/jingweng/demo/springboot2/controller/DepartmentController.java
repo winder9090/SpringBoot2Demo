@@ -5,13 +5,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jingweng.demo.springboot2.entity.Department;
 import jingweng.demo.springboot2.excel.DepartmentsExcel;
+import jingweng.demo.springboot2.page.PageRequest;
 import jingweng.demo.springboot2.service.DepartmentService;
 import jingweng.demo.springboot2.utils.ExcelUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
@@ -48,4 +47,11 @@ public class DepartmentController {
 
         ExcelUtils.exportExcelToTarget(response, null, list, DepartmentsExcel.class);
     }
+
+    @PostMapping(value="/findPage")
+    @ApiOperation(value = "分页查询")
+    public Object findPage(@RequestBody PageRequest pageQuery) {
+        return departmentServer.findPage(pageQuery);
+    }
+
 }

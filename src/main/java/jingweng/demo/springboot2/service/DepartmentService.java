@@ -1,6 +1,8 @@
 package jingweng.demo.springboot2.service;
 
 import jingweng.demo.springboot2.entity.Department;
+import jingweng.demo.springboot2.page.PageRequest;
+import jingweng.demo.springboot2.page.PageResult;
 
 import java.util.List;
 
@@ -15,4 +17,5 @@ import java.util.List;
  */
 public interface DepartmentService {
     List<Department> getDepartments();
+    PageResult findPage(PageRequest pageRequest);
 }

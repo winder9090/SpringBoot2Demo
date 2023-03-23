@@ -1,5 +1,6 @@
 package jingweng.demo.springboot2.mapper;
 
+import cn.hutool.system.UserInfo;
 import jingweng.demo.springboot2.entity.Department;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +18,11 @@ import java.util.List;
 @Mapper
 public interface DepartmentMapper {
     List<Department> getDepartments();
+
+    /**
+     * 分页查询用户
+     * @return
+     */
+    List<Department> selectPage();
 }
 
