@@ -77,9 +77,11 @@ public class ShiroConfig {
         map.put("/v2/api-docs", "anon");
         map.put("/doc.html", "anon");      // 允许匿名访问
         map.put("/swagger-resources/**", "anon");
+        map.put("/captcha", "anon");
         map.put("/api/websocket/**", "oauth2");
         map.put("/hello", "oauth2");        // 进行身份认证后才能访问
         map.put("/getDepartments", "oauth2");        // 进行身份认证后才能访问
+        map.put("/**", "oauth2");        // 进行身份认证后才能访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }
