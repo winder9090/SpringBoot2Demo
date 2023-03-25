@@ -22,6 +22,7 @@ public class TcpClientCommandLineRunner implements CommandLineRunner {
 		try {
 			TcpClientConnection tcpClient = new TcpClientConnection("10.10.10.82",13002);
 			tcpClient.start();
+
 		} catch (IOException e) {
 			System.out.println("IOException： " + e.getLocalizedMessage());
 		}
