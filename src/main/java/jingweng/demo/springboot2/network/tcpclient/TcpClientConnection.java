@@ -1,4 +1,4 @@
-package jingweng.demo.springboot2.tcp;
+package jingweng.demo.springboot2.network.tcpclient;
 
 import lombok.extern.slf4j.Slf4j;
 

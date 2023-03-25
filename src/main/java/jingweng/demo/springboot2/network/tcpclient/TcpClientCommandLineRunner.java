@@ -1,4 +1,4 @@
-package jingweng.demo.springboot2.tcp;
+package jingweng.demo.springboot2.network.tcpclient;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
