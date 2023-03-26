@@ -1,4 +1,4 @@
-package jingweng.demo.springboot2.netty.server;
+package jingweng.demo.springboot2.network.netty.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;

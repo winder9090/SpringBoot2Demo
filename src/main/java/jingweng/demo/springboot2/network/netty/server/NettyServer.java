@@ -1,4 +1,4 @@
-package jingweng.demo.springboot2.netty.server;
+package jingweng.demo.springboot2.network.netty.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

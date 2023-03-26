@@ -1,4 +1,4 @@
-package jingweng.demo.springboot2.nio;
+package jingweng.demo.springboot2.network.nio;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
