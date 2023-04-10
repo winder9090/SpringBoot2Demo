@@ -52,7 +52,8 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = (User) principalCollection.getPrimaryPrincipal();
+        //User user = (User) principalCollection.getPrimaryPrincipal();
+        UserToken user =  (UserToken)principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         List<Role> roleList = roleService.findRoleByUserId(user.getId());
         Set<String> roleSet = new HashSet<>();
