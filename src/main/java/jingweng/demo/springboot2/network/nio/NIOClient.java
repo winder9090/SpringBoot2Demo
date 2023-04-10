@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 
-@Component
+//@Component
 @Slf4j
 public class NIOClient {
 

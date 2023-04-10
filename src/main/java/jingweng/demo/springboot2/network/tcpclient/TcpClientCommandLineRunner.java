@@ -14,7 +14,7 @@ import java.io.IOException;
  * @date: 2023/3/24 17:30
  * @version: 1.0
  */
-@Component
+//@Component
 public class TcpClientCommandLineRunner implements CommandLineRunner {
 
     @Override

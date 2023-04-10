@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.net.InetSocketAddress;
 
-@Component
+//@Component
 @Slf4j
 public class NettyServer {
     /**

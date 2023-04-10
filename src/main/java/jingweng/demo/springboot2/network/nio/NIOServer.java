@@ -17,7 +17,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-@Component
+//@Component
 @Slf4j
 public class NIOServer {
 

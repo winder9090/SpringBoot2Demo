@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
+//@Component
 public class TcpServerCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
