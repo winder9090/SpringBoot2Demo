@@ -25,7 +25,7 @@ public class ScheduleJobEntity implements Serializable {
     /**
      * spring bean名称
      */
-    private String bean_Name;
+    private String beanName;
     /**
      * 参数
      */
@@ -33,7 +33,7 @@ public class ScheduleJobEntity implements Serializable {
     /**
      * cron表达式
      */
-    private String cron_Expression;
+    private String cronExpression;
     /**
      * 任务状态  0：暂停  1：正常
      */

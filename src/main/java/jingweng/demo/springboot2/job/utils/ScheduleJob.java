@@ -33,7 +33,7 @@ public class ScheduleJob extends QuartzJobBean {
         try {
             //执行任务
             logger.info("任务准备执行，任务ID：{}", scheduleJob.getId());
-            Object target = SpringContextUtils.getBean(scheduleJob.getBean_Name());
+            Object target = SpringContextUtils.getBean(scheduleJob.getBeanName());
             Method method = target.getClass().getDeclaredMethod("run", String.class);
             method.invoke(target, scheduleJob.getParams());
 
