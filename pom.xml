@@ -21,6 +21,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
+				<!-- 排除传递过来的tomcat依赖 -->
 				<exclusion>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 					<groupId>org.springframework.boot</groupId>
