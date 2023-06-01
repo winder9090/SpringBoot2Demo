@@ -72,7 +72,7 @@ spring:
 # 是否开启redis缓存  true开启   false关闭
 renren:
   redis:
-    open: true
+    open: false
 
 ## mapper xml 文件地址
 #mybatis:
